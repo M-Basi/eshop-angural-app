@@ -57,3 +57,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+At current phase start a local development server, run:
+
+```bash
+ng serve
+```
+
+Only customers can registered
+Admin users should inserted directly to sql base or using backend spring boot code through postman or swagger
+You will find the backend project at https://github.com/M-Basi/project-eshop 
+
+One lag is present, when you login as customer or admin user on oppening li elememnt . You should reload the page and everything is ok
