@@ -70,6 +70,8 @@ export class HeaderComponent {
         name: new FormControl(''),
       });
 
+
+
     ngOnInit(): void {
       this.createUser();   
       this.fetchCustomerByUserUuid();  

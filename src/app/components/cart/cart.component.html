@@ -59,7 +59,7 @@
   <div class="d-flex justify-content-between mt-3">
     <h4>Σύνολο: {{ totalSum | number: '1.2-2' }} €</h4>
     @if(currentCustomer) {        
-        <button class="btn btn-success" (click)="placeOrder()">Τοποθέτηση Παραγγελίας</button>
+        <button class="btn btn-success" (click)="placeOrder()" [disabled]="cartItems.length === 0">Τοποθέτηση Παραγγελίας</button>
     } @else {         
         <button class="btn btn-success" (click)="login()">Login</button>
     }

@@ -94,48 +94,7 @@ export class UserService {
       this.router.navigate(['login'])
     }
 
-
-
-
-    // refreshToken(credentials: Credentials): Observable<AuthenticationResponse> {
-    //   return this.http.post<AuthenticationResponse>(
-    //     `${API_URL}/auth/refreshToken`,
-    //     credentials,
-    //     {
-    //       headers: new HttpHeaders({
-    //         'Content-Type': 'application/json',
-    //       }),
-    //     }
-    //   );
-    // }
-
-    // refreshValuesToken(token: string): void {
-    //   const decodedToken = jwtDecode(token) as any;
-    
-    //   const expirationTime = decodedToken.exp;
-    
-    //   // Update local storage
-    //   localStorage.setItem('access_token', token);
-    //   localStorage.setItem('firstname', this.user()?.firstname || '');
-    //   localStorage.setItem('userUuid', decodedToken.sub);
-    //   localStorage.setItem('token_expiration', expirationTime.toString());
-    
-
-    //   const loggedInUser: LoggedInUser = {
-    //     firstname: this.user()?.firstname || '',
-    //     userUuid: decodedToken.sub,
-    //     username: decodedToken.sub,
-    //     role: decodedToken.role,
-    //   };
-
-    //   console.log('Logged in user:', loggedInUser);
-
-    //   // Ενημέρωση του χρήστη στο service
-    //   this.user.set(loggedInUser);
-    
-    //   console.log('Token and user information updated.');
-    // }
-    
+   
     
     userUpdate(user: any): Observable<any> {
       return this.http.post<any>(`${API_URL}/users/user/update`,user);
@@ -145,9 +104,5 @@ export class UserService {
         return this.http.post<User>(`${API_URL}/users/user/get`, userUuid);
         
       }
-
-    
-
-    
-    
+      
 }

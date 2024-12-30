@@ -19,6 +19,7 @@ export class UserLoginComponent {
   userService = inject(UserService)
   router = inject(Router)
   invalidLogin = false;
+  isLoading = true;
 
   form = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -60,8 +61,12 @@ export class UserLoginComponent {
         this.userService.user.set(loggedInUser);
         this.cdr.detectChanges();
         // Πλοήγηση στη σελίδα καλωσορίσματος
-
-        this.router.navigate(['./welcome']);
+        alert("Succesfull login")
+        setTimeout(() => {
+          this.isLoading = false;
+          this.router.navigate(['./welcome']);
+        }, 500); // Καθυστέρηση 500ms
+        
       },
       error: (error) => {
         console.error('Login Error:', error);
