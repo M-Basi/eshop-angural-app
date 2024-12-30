@@ -1,0 +1,67 @@
+  <table class="table">
+    <thead class="table-primary">
+      <tr>
+        <th></th>
+        <!-- <th>Id</th> -->
+        <th>Sku</th>
+        <th>Όνομα</th>
+        <th>Επωνυμία</th>
+        <th>Κατηγορία</th>
+        <th>Τιμή Προϊόντος</th>
+        <th>Ποσότητα</th>
+        <th>Σύνολο</th>
+        <th>Διαγραφή</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let product of cartItems">
+        @if (product.id && product.quantity) {
+            <td class="align-middle">
+                <a class="btn dropdown-item text-decoration-none" role="button">
+                  <img
+                    [src]="'http://localhost:8080/' + product?.image?.filePath"
+                    alt="Product Image"
+                    height="50"
+                    loading="lazy"
+                  />
+                </a>
+              </td>
+              <!-- <td class="align-middle"> <a class="btn dropdown-item text-decoration-none" role="button" (click)="onProductClick(product.id)"> {{ product?.id }} </a></td> -->
+              <td class="align-middle"> <a class="btn dropdown-item text-decoration-none" role="button" (click)="onProductClick(product.id)"> {{ product?.sku }} </a></td>
+              <td class="align-middle"><a class="btn dropdown-item text-decoration-none" role="button" (click)="onProductClick(product.id)"> {{ product?.name }}</a></td>
+              <td class="align-middle">{{ product?.brand?.brandName }}</td>
+              <td class="align-middle">{{ product?.category?.categoryName }}</td>
+              <td class="align-middle">{{ product?.price | number: '1.2-2' }} €</td>
+              <td class="align-middle">
+                  <input class="col-4"
+                      type="number"
+                      [(ngModel)]="product.quantity"
+                      (ngModelChange)="updateQuantity(product.id, product.quantity)"
+                      [min]="1"
+                  />
+              </td>
+              <td class="align-middle">{{ product.totalPrice| number: '1.2-2' }} €</td>
+              <td>
+                <button class="btn ms-2" (click)="removeItem(product.id)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+        }
+            
+        
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between mt-3">
+    <h4>Σύνολο: {{ totalSum | number: '1.2-2' }} €</h4>
+    @if(currentCustomer) {        
+        <button class="btn btn-success" (click)="placeOrder()">Τοποθέτηση Παραγγελίας</button>
+    } @else {         
+        <button class="btn btn-success" (click)="login()">Login</button>
+    }
+</div>
+  

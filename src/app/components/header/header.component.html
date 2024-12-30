@@ -1,0 +1,171 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<div class="container">
+
+    <header>
+        <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <!-- Να βαλω logo -->
+        <span class="fs-4">MyEshop</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+             
+            @if (user()) {
+              @if(user()?.role === 'CUSTOMER_USER') {
+                @if (user()?.firstname === 'User') {
+                  Welcome User
+                }
+                @else {
+                  Wellcome {{user()?.firstname}}
+                }
+              }
+              @else {
+                Welcome Admin
+              }
+              
+              
+              <mat-icon role="button" (click)="logout()">logout</mat-icon>
+            }
+            @else {
+              <i class="bi bi-person-plus"></i>
+              My Account
+            }
+          </a>
+          <ul *ngIf="!user()?.role" class="dropdown-menu" aria-labelledby="accountDropdown">
+            <li *ngFor="let entry of menu; trackBy: trackByText">
+              <a class="dropdown-item btn" role="btn" [routerLink]="entry.routerLink" [routerLinkActive]="['active']">
+                {{ entry.text }}
+              </a>
+            </li>
+          </ul>
+          
+          <ul *ngIf="user()?.role === 'CUSTOMER_USER'" class="dropdown-menu" aria-labelledby="accountDropdown">
+            <li *ngFor="let entry of menuCustomer; trackBy: trackByText">
+              <a class="dropdown-item btn bg-white" role="btn" [routerLink]="entry.routerLink" [routerLinkActive]="['active']">
+                <span class="text-dark">{{ entry.text }}</span>
+              </a>
+            </li>
+          </ul>
+          
+          <ul *ngIf="user()?.role === 'ADMIN_USER'" class="dropdown-menu" aria-labelledby="accountDropdown">
+            <li *ngFor="let entry of menuAdmin; trackBy: trackByText">
+              <a class="dropdown-item btn bg-white" role="btn" [routerLink]="entry.routerLink" [routerLinkActive]="['active']">
+                <span class="text-dark">{{ entry.text }}</span>
+              </a>
+            </li>
+          </ul>
+          <!-- @if(!user()?.role) {
+            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                @for (entry of menu; track entry) {
+                  <li><a class="dropdown-item btn" role="btn" [routerLink] = "entry.routerLink" [routerLinkActive] = "['active']"> {{entry.text}}</a></li>
+                  
+                }
+              
+          </ul>
+          }
+          @else() {
+            @if(user()?.role === 'CUSTOMER_USER') {
+              <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                @for (entry of menuCustomer; track entry) {
+                  <li><a class="dropdown-item btn bg-white" role="btn" [routerLink] = "entry.routerLink" [routerLinkActive] = "['active']"> <span class="text-dark">{{entry.text}}</span></a></li>
+                }
+              
+              </ul>
+            }
+            @else {
+              <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                @for (entry of menuAdmin; track entry) {
+                  <li><a class="dropdown-item btn bg-white" role="btn" [routerLink] = "entry.routerLink" [routerLinkActive] = "['active']"> <span class="text-dark">{{entry.text}}</span> </a></li>
+                }
+              
+              </ul>
+            }
+          } -->
+
+          <!-- @else if (user() && userRole === "CUSTOMER_USER") {
+            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+              @for (entry of menuCustomer; track entry) {
+                <li><a class="dropdown-item btn bg-white" role="btn" [routerLink] = "entry.routerLink" [routerLinkActive] = "['active']"> <span class="text-dark">{{entry.text}}</span></a></li>
+              }
+            
+            </ul>
+          }
+          @else {
+            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+              @for (entry of menuAdmin; track entry) {
+                <li><a class="dropdown-item btn bg-white" role="btn" [routerLink] = "entry.routerLink" [routerLinkActive] = "['active']"> <span class="text-dark">{{entry.text}}</span> </a></li>
+              }
+            
+            </ul>
+          } -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn" role="button" (click)="toCart()">Shopping Cart</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+        </div>
+
+       <div class="flex flex-wrap">
+        <div>
+            <nav class="navbar bg-body-tertiary justify-content-md-center">
+                <div class="container-fluid row col-9 m">
+                  <div class="d-flex flex-column">
+                    <div class="mt-2">
+                    <form [formGroup]="productFiltersForm" class="">
+                      
+                        <input matInput type="text" class="form-control me-2" formControlName="name" placeholder="Αναζήτηση ανά Προϊόν" (input)="fetchProducts()">
+                        <!-- <input class="form-control me-2" type="search" placeholder="Αναζήτηση ανά Προϊόν" aria-label="Search" >
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button> -->
+                    </form>   
+                  </div>   
+                    <div *ngIf="products.length > 0" class="dropdown-menu show mt-5">
+                      <li *ngFor="let product of products" class="dropdown-item">
+                        <div class="d-flex flex-row align-items-center">
+                          <!-- Εικόνα Προϊόντος -->
+                          <div class="me-3">
+                            <img 
+                              [src]="'http://localhost:8080/' + product?.image?.filePath" 
+                              alt="Product Image" 
+                              class="img-thumbnail" 
+                              style="width: 50px; height: 50px; object-fit: cover;"
+                            >
+                          </div>
+                          <!-- Όνομα Προϊόντος -->
+                          <span> {{ product.name }}</span>
+                        </div>
+                      </li>
+                    </div>
+                    
+                    <!-- Μήνυμα όταν δεν υπάρχουν αποτελέσματα -->
+                    <div *ngIf="products.length === 0 && productFiltersForm.value.name" class="mt-2">
+                      <p class="text-muted">Δεν βρέθηκαν προϊόντα για την αναζήτησή σας.</p>
+                    </div>          
+                  </div>
+                </div>
+              </nav>
+              
+         </div>
+       </div>
+       <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/assets/images/name.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/images/name.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/images/name.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+      </div> -->
+     
+      
+    </header>
+  </div>
+

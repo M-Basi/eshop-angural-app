@@ -1,0 +1,56 @@
+
+<div>
+    <app-customers-filters (filtersChanged)="onFiltersChanged($event)"></app-customers-filters>
+    <table class="table">
+
+        <thead class="table-primary">
+            <tr>
+            
+                <!-- <th>Uuid</th> -->
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Ckeck Customer</th>
+                <th>Check Orders</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let customer of customers">
+                <!-- <td class="align-middle">
+                    <a class="btn dropdown-item text-decoration-none" role="button" (click)="onCustomerClick(customer.uuid)">
+                        {{customer.uuid}}
+                    </a>
+                    
+                </td> -->
+                <td class="align-middle"><a class="btn text-decoration-none" role="button">{{ customer?.firstname}}</a></td>
+                <td class="align-middle"><a class="btn text-decoration-none" role="button" >{{ customer?.lastname}}</a></td>
+                <td class="align-middle"><a class="btn text-decoration-none" role="button">{{ customer?.customerInfoReadOnlyDTO?.phoneNumber}}</a></td>
+                <td>
+                    <button class="btn btn-dark" (click)="onCustomerClick(customer.uuid)">
+                    Check Customer
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-dark" (click)="toCheckOrders(customer.uuid)">
+                    Check Orders
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation" class="mt-3">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+          </li>
+          <li class="page-item" *ngFor="let page of totalPagesArray" [class.active]="page === currentPage">
+            <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+          </li>
+        </ul>
+      </nav>
+</div>

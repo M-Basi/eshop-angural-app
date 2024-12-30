@@ -1,0 +1,41 @@
+<div class="card mb-3 shadow-sm">
+  <div class="row g-0">
+    <div class="col-md-4 b">
+      <img class="img-fluid rounded-start" style="max-height: 70%"
+          [src]="'http://localhost:8080/' + product?.image?.filePath"
+          alt="Product Image"
+
+              />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        
+          @if (product?.id) {
+            <small>Κωδικός: {{product?.sku}}</small>
+            <h5 class="card-title" role="button" (click)="onProductClick(product?.id ?? 0)"> {{ product?.name }}</h5>
+              <p class="card-text">
+                <strong role="button" (click)="onProductClick(product?.id ?? 0)">{{product?.brand?.brandName}}</strong> <br>
+                <strong role="button" (click)="onProductClick(product?.id ?? 0)">{{product?.category?.categoryName}}</strong><br>
+                @if (user()?.role === 'ADMIN_USER') {
+                  <strong class="text-success">Ενεργό</strong><br>
+                }
+              </p>
+          }
+
+         
+       
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-success fw-bold"> @if (!product?.isInStock){Άμεσα διαθέσιμο} ({{product?.quantity}} τεμ)</span>
+          <span class="text-primary fs-4">{{product?.price | number: '1.2-2' }} € </span>
+          @if (user()?.role === 'ADMIN_USER' && product?.id) {
+            <button class="btn btn-warning text-white" (click)="toUpdateProduct(product?.id ?? 0)">Επεξεργασία Προϊόντος</button>
+            <button class="btn btn-warning text-white" (click)="deleteProduct(product?.id ?? 0)"> Διαγραφή προιόντος</button>
+          } @else {
+            <button class="btn btn-warning text-white" (click)="addToCart(product)" [disabled]="product?.quantity === 0">Προσθήκη στο Καλάθι</button>
+          }
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

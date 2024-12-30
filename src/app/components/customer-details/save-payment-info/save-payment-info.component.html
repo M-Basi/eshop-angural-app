@@ -1,0 +1,50 @@
+<div class="d-flex flex-column col-8">
+    <h5>Εγγραφή Στοιχείων Κάρτας</h5>
+    <form [formGroup]="form" class="d-flex flex-column">
+      <mat-form-field>        
+        <mat-label>Όνομα Καρτας</mat-label>        
+        <input matInput type="text" formControlName="cardName" placeholder="πχ. Marios Petropoulos">
+        <mat-error *ngIf="form.get('cardName')?.invalid && form.get('cardName')?.touched"></mat-error>
+        
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <mat-label>Αριθμός Κάρτας</mat-label>
+        <input matInput type="text" formControlName="card" placeholder="π.χ., 1234765987652344">
+        <mat-error *ngIf="form.get('card')?.invalid && form.get('card')?.touched"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ημερομηνία Λήξης</mat-label>
+        <input matInput type="text" formControlName="expiredDate" placeholder="π.χ., 12/27">
+        <mat-error *ngIf="form.get('expiredDate')?.invalid && form.get('expiredDate')?.touched"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CVV</mat-label>
+        <input matInput type="text" formControlName="cardValidation" placeholder="π.χ., 699">
+        <mat-error *ngIf="form.get('cardValidation')?.invalid && form.get('cardValidation')?.touched"></mat-error>
+      </mat-form-field>
+
+
+    </form>
+      
+  
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="onSubmit(form.value)"
+    >
+      Submit
+    </button>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+  </div>

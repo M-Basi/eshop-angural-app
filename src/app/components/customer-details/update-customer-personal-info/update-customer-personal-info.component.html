@@ -1,0 +1,83 @@
+<div class="d-flex flex-column col-8">
+    <h5>Εγγραφή Στοιχείων Επικοινωνίας</h5>
+    <form [formGroup]="form" class="d-flex flex-column">
+      <mat-form-field>        
+        <mat-label>Τηλέφωνο</mat-label>        
+        <input matInput type="text" formControlName="phoneNumber" placeholder="πχ. 6934562325">
+        <mat-error *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched"></mat-error>
+        
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <mat-label>Χώρα</mat-label>
+        <input matInput type="text" formControlName="country" placeholder="π.χ., Ελλάδα">
+        <mat-error *ngIf="form.get('country')?.invalid && form.get('country')?.touched"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Περιοχή</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="region"
+          placeholder="π.χ., ΑΤΤΙΚΉ"
+          [matAutocomplete]="autoRegion"
+          (focus)="filterRegions()"
+        />
+        <mat-autocomplete #autoRegion="matAutocomplete" (optionSelected)="onRegionSelected($event)">
+          <mat-option *ngFor="let region of filteredRegions" [value]="region.name">
+            {{ region.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.get('region')?.invalid && form.get('region')?.touched">
+          Παρακαλώ μία έγκυρη Κατηγορία.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Πόλη</mat-label>
+        <input matInput type="text" formControlName="city" placeholder="π.χ., Αθήνα">
+        <mat-error *ngIf="form.get('city')?.invalid && form.get('city')?.touched"></mat-error>
+      </mat-form-field>
+
+     
+      <mat-form-field>
+        <mat-label>Οδός</mat-label>
+        <input matInput type="text" formControlName="street" placeholder="π.χ., Εκάβης">
+        <mat-error *ngIf="form.get('street')?.invalid && form.get('street')?.touched"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Αριθμός</mat-label>
+        <input matInput type="text" formControlName="streetNumber" placeholder="π.χ., 14">
+        <mat-error *ngIf="form.get('streetNumber')?.invalid && form.get('streetNumber')?.touched"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>TK</mat-label>
+        <input matInput type="text" formControlName="zipCode" placeholder="π.χ., 14433">
+        <mat-error *ngIf="form.get('zipCode')?.invalid && form.get('zipCode')?.touched"></mat-error>
+      </mat-form-field>
+
+
+    </form>
+      
+  
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="onUpdate(form.value)"
+    >
+      Submit
+    </button>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+  </div>

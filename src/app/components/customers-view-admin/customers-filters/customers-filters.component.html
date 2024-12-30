@@ -1,0 +1,23 @@
+<div class="d-flex flex-wrap">
+    <form [formGroup]="customerFiltersForm" class="d-flex flex-row ">
+      <mat-form-field class="me-2">
+        <input matInput type="text" formControlName="lastname" placeholder="Πετρόπουλος" >
+      </mat-form-field>
+      
+  
+      <mat-form-field class="me-2">
+        <input matInput type="text" formControlName="username" placeholder="π.χ., example@xxxx.com">
+      </mat-form-field>
+  
+  
+      <mat-form-field class="me-2">
+        <input matInput type="text" formControlName="phoneNumber" placeholder="π.χ., 6999999999">
+      </mat-form-field>
+  
+
+    </form>
+  
+    <button mat-flat-button color="primary" (click)="resetFilters()">Reset</button>
+    
+  
+  </div>

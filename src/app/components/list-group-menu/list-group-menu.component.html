@@ -1,0 +1,120 @@
+<div class="container" style="width: 230px; min-height: 60vh;">
+   
+    <!-- Προϊόντα Button -->
+    <a class="btn me-2" data-bs-toggle="collapse" href="#productCollapse" role="button" aria-expanded="false" aria-controls="productCollapse">
+        <h4> <i class="bi bi-list"></i> Προϊόντα</h4>
+    </a>
+    <div class="collapse ms-4" id="productCollapse">
+        <li class="list-group-item text-truncate">
+            <a class="btn dropdown-item me-2 mb-3 text-decoration-none" role="btn" (click)="onProductsClick()">
+                <h5 class="text text-dark"> All</h5>
+            </a>
+        </li>
+    </div>
+
+    <!-- Κατηγορίες -->
+    <div class="collapse ms-5" id="productCollapse">
+        <a class=" text-decoration-none" role="button" (click)="toggleCategories()">
+            <h5 class="text text-dark">Κατηγορίες</h5>
+        </a>
+        <div class="collapse mb-2" [class.show]="categoriesVisible">
+            <ul class="list-group">
+                <li class="list-group-item text-truncate border border-0" *ngFor="let category of displayedCategories">
+                    <a class="btn dropdown-item text-decoration-none text-wrap" role="btn" (click)="onCategoryClick(category.categoryName)">
+                        {{ category.categoryName }}
+                    </a>
+                </li>
+                <li class="list-group-item text-truncate border border-0" *ngIf="categories.length > displayedCategories.length">
+                    <a class="btn text-primary text-wrap" role="btn" (click)="showMoreCategories()">Περισσότερα...</a>
+                </li>
+                <li class="list-group-item text-truncate border border-0" *ngIf="categories.length === displayedCategories.length">
+                    <a class="btn text-primary text-wrap" role="btn" (click)="showLessCategories()">Λιγότερα...</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Brands -->
+    <div class="collapse ms-5" id="productCollapse">
+        <a class="text-decoration-none" role="button" (click)="toggleBrands()">
+            <h5 class="text text-dark">Brands</h5>
+        </a>
+        <div class="collapse" [class.show]="brandsVisible">
+            <ul class="list-group">
+                <li class="list-group-item text-truncate border border-0" *ngFor="let brand of displayedBrands">
+                    <a class="btn dropdown-item text-decoration-none" role="button" (click)="onBrandClick(brand.brandName)">
+                        {{ brand.brandName }}
+                    </a>
+                </li>
+                <li class="list-group-item text-truncate border border-0" *ngIf="brands.length > displayedBrands.length">
+                    <a class="btn text-primary" role="btn" (click)="showMoreBrands()">Περισσότερα...</a>
+                </li>
+                <li class="list-group-item text-truncate border border-0" *ngIf="brands.length === displayedBrands.length">
+                    <a class="btn text-primary" role="btn" (click)="showLessBrands()">Λιγότερα...</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="container" style="width: 230px; ">
+   
+    <a class="btn me-2" data-bs-toggle="collapse" href="#productCollapse" role="button" aria-expanded="false" aria-controls="productCollapse">
+        <h4> <i class="bi bi-list"></i> Προϊόντα</h4>
+    </a>
+    <div class="collapse" id="productCollapse">
+    
+        
+            <li class="list-group-item text-truncate">
+                <a class="btn dropdown-item me-2 mb-3 text-decoration-none" role="btn"  (click)="onProductsClick()"><h5 class="text text-dark"> All Products</h5></a>
+            </li>
+        
+        
+    </div>
+
+
+    <div class="collapse" id="productCollapse">
+
+        <a class="me-2 text-decoration-none" data-bs-toggle="collapse" href="#categoriesCollapse" role="button" aria-expanded="false" aria-controls="categoriesCollapse">
+            <h5 class="text text-dark">Κατηγορίες</h5>
+        </a>
+        <div class="collapse mb-3" id="categoriesCollapse">
+            <ul class="list-group">              
+                
+                @for (category of categories; track category) {
+                    <li class="list-group-item text-truncate">
+                        <a class="btn dropdown-item text-decoration-none" role="btn"  (click)="onCategoryClick(category.categoryName)">{{ category.categoryName }}</a>
+                        
+                      
+                    </li>
+                }
+               
+            </ul>
+        </div>
+
+        
+        <a class="me-2 text-decoration-none" data-bs-toggle="collapse" href="#brandsCollapse" role="button" aria-expanded="false" aria-controls="brandsCollapse">
+            <h5 class="text text-dark">Brands</h5>
+        </a>
+        <div class="collapse" id="brandsCollapse">
+            <ul class="list-group">                
+                @for (brand of brands; track brand) {
+                    <li class="list-group-item text-truncate">
+                        <a class="btn dropdown-item text-decoration-none" role="button" (click)="onBrandClick(brand.brandName)">{{ brand.brandName }}</a>                    
+                      
+                    </li>
+                }
+              
+            </ul>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+    

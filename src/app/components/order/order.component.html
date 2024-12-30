@@ -1,0 +1,24 @@
+<div class="card border-success mb-3">
+    <div class="card-header bg-light text-dark d-flex justify-content-between">
+      <div>
+        <strong>Αριθμός Παραγγελίας:</strong> {{order?.orderTrackingNumber}}
+      </div>
+      <div>
+        <strong>Ημερομηνία Παραγγελίας:</strong> {{order?.createdDate}}
+      </div>
+      <div>
+        <strong>Κατασταση Παραγγελίας:</strong><span class="text-success"> {{order?.status}}</span>
+      </div>
+    </div>
+    <div class="card-body">
+        @if(order) {
+            <div *ngFor="let orderItem of order.orderItems" class="row g-0 align-items-center">
+                <app-order-item [orderItem]="orderItem"></app-order-item>
+              </div>
+        }
+        <div class="text-end pe-3 align-items">
+          <span class="text-primary fs-5 fw-bold text-end">Τελικό Σύνολο {{order?.totalPrice | number: '1.2-2' }} €</span>
+        </div>
+    </div>
+  </div>
+  

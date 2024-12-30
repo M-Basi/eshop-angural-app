@@ -1,0 +1,39 @@
+<div class="d-flex flex-column col-8">
+    <h5>Εγγραφή Προσωπικών στοιχείων</h5>
+    <form [formGroup]="form" class="d-flex flex-column">
+      <mat-form-field>        
+        <mat-label>Όνομα</mat-label>        
+        <input matInput type="text" formControlName="firstname" placeholder="πχ. Μάριος">
+        <mat-error *ngIf="form.get('firstname')?.invalid && form.get('firstname')?.touched"></mat-error>
+        
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <mat-label>Επίθετο</mat-label>
+        <input matInput type="text" formControlName="lastname" placeholder="π.χ., Παπαπέτρου">
+        <mat-error *ngIf="form.get('lastname')?.invalid && form.get('lastname')?.touched"></mat-error>
+      </mat-form-field>
+    </form>
+      
+  
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="onSubmit(form.value)"
+    >
+      Submit
+    </button>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+  </div>
+  
+
+

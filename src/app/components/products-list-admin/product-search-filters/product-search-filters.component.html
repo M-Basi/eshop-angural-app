@@ -1,0 +1,54 @@
+<div class="d-flex flex-wrap">
+  
+  <form [formGroup]="productFiltersForm" class="d-flex flex-row ">
+    <mat-form-field class="me-2">
+      <input matInput type="text" formControlName="sku" placeholder="00001" >
+    </mat-form-field>
+    
+
+    <mat-form-field class="me-2">
+      <input matInput type="text" formControlName="name" placeholder="π.χ., Iphone 14 pro Max">
+    </mat-form-field>
+
+
+    <mat-form-field class="me-2">
+      <input
+        matInput
+        type="text"
+        formControlName="brand"
+        placeholder="π.χ., Samsung"
+        [matAutocomplete]="autoBrand"
+        (focus)="filterBrands()"
+      />
+      <mat-autocomplete #autoBrand="matAutocomplete" (optionSelected)="onBrandSelected($event)">
+        <mat-option *ngFor="let brand of filteredBrands" [value]="brand.brandName">
+         {{ brand.brandName }}
+        </mat-option>
+      </mat-autocomplete>
+    
+    </mat-form-field>
+
+
+    <mat-form-field class="me-2">
+      <mat-label>Category</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="category"
+        placeholder="π.χ., Κλιματιστικά"
+        [matAutocomplete]="autoCategory"
+        (focus)="filterCategories()"
+      />
+      <mat-autocomplete #autoCategory="matAutocomplete" (optionSelected)="onCategorySelected($event)">
+        <mat-option *ngFor="let category of filteredCategories" [value]="category.categoryName">
+          {{ category.categoryName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <button mat-flat-button color="primary" (click)="resetFilters()">Reset</button>
+  
+
+</div>
+

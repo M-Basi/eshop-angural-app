@@ -1,0 +1,117 @@
+<div class="d-flex flex-column col-8">
+    <h5>Update Product</h5>
+    <form [formGroup]="productForm" class="d-flex flex-column" (product)="onProduct()">
+      <mat-form-field>
+        
+        <mat-label>Κωδικός Προϊόντος</mat-label>
+        
+        <input matInput type="text" formControlName="sku" placeholder="00001" (input)="onSkuInput($event)">
+        <p *ngIf="errorMessageSku" class="error-message text-danger">{{ errorMessageSku }}</p>
+        <mat-error *ngIf="productForm.get('sku')?.invalid && productForm.get('sku')?.touched"></mat-error>
+        
+      </mat-form-field>
+      
+  
+      <mat-form-field>
+        <mat-label>Όνομα Προϊόντος</mat-label>
+        <input matInput type="text" formControlName="name" placeholder="π.χ., Iphone 14 pro Max">
+        <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" placeholder="π.χ., 199,99">
+        <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"></mat-error>
+        
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Brand</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="brandName"
+          placeholder="π.χ., Samsung"
+          [matAutocomplete]="autoBrand"
+          (focus)="filterBrands()"
+        />
+        <mat-autocomplete #autoBrand="matAutocomplete" (optionSelected)="onBrandSelected($event)">
+          <mat-option *ngFor="let brand of filteredBrands" [value]="brand.brandName">
+           {{ brand.brandName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="productForm.get('brandName')?.invalid && productForm.get('brandName')?.touched">
+          Παρακαλώ μία έγκυρη επωνυμία.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- <mat-form-field>
+        <mat-label>Κατηγορία Προϊόντος</mat-label>
+        <input matInput type="number" formControlName="categoryNumber" placeholder="π.χ., 2">
+        <mat-error *ngIf="productForm.get('categoryNumber')?.invalid && productForm.get('categoryNumber')?.touched"></mat-error>
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="categoryName"
+          placeholder="π.χ., Κλιματιστικά"
+          [matAutocomplete]="autoCategory"
+          (focus)="filterCategories()"
+        />
+        <mat-autocomplete #autoCategory="matAutocomplete" (optionSelected)="onCategorySelected($event)">
+          <mat-option *ngFor="let category of filteredCategories" [value]="category.categoryName">
+            {{ category.categoryName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="productForm.get('categoryName')?.invalid && productForm.get('categoryName')?.touched">
+          Παρακαλώ μία έγκυρη Κατηγορία.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Ποσότητα</mat-label>
+        <input matInput type="number" formControlName="quantity" placeholder="π.χ., 10">
+        <mat-error *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
+        </mat-error>
+      </mat-form-field>
+
+
+     
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Περιγραφή του προϊόντος"></textarea>
+        <mat-error *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"></mat-error>
+      </mat-form-field>
+  
+    </form>
+  
+    <h5>Upload Product Image</h5>
+    <form [formGroup]="photoProductForm" class="d-flex flex-column mt-2 mb-3">
+      <label for="fileInput" class="mb-2">Upload Product Image:</label>
+      <img [src]="'http://localhost:8080/' + filePreview" alt="Preview" style="max-width: 200px; max-height: 200px;" />
+      <input id="fileInput" type="file" (change)="onFileChange($event)">
+      <div *ngIf="filePreview">
+        <p>Preview:</p>
+        <img [src]="filePreview" alt="Preview" style="max-width: 200px; max-height: 200px;" />
+      </div>
+    </form>
+  
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="productForm.invalid || photoProductForm.invalid"
+      (click)="onUpdate(productForm.value, photoProductForm.value)"
+    >
+      Update Product
+    </button>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  </div>

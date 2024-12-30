@@ -1,0 +1,24 @@
+<div class="card mb-3 shadow-sm">
+    <div class="row g-0 align-items-center">
+      <div class="col-md-2">
+        <img [src]="'http://localhost:8080/' + orderItem?.image?.filePath" class="img-fluid rounded-start fixed-image-size" alt="{{orderItem?.name}}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h6 class="card-title mb-1">{{orderItem?.name}}</h6>
+          <p class="card-text mb-0 text-muted">
+            <small>Κωδικός: {{orderItem?.sku}}</small>
+          </p>
+          <p class="card-text mb-0">
+            <strong>Ποσότητα:</strong> {{orderItem?.quantity}}
+          </p>
+          <p class="card-text mb-0">
+            <strong>Ποσότητα:</strong> Τιμή {{orderItem?.price | number: '1.2-2' }} €
+          </p>
+        </div>
+      </div>
+      <div class="col-md-2 text-end pe-3">
+        <span class="text-primary fs-5 fw-bold"> Σύνολο {{orderItem?.totalPrice | number: '1.2-2' }} €</span>
+      </div>
+    </div>
+  </div>

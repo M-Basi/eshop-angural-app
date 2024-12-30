@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+      <!-- Content Section -->
+      <div id="content" class="col-sm-12">
+        <div class="row">
+          <!-- Product Details and Images -->
+          <div class="col-sm-8">
+            <!-- Image Thumbnails -->
+            <ul class="thumbnails d-flex flex-wrap">
+              <!-- <li class="me-2"> -->
+                <a class="thumbnail" href="#" title="MacBook">
+                  <img class="img-fluid" [src]="'http://localhost:8080/' + currentProduct?.image?.filePath">
+                </a>
+              <!-- </li> -->
+              <!-- <li class="image-additional me-2">
+                <a class="thumbnail" href="#" title="MacBook">
+                  <img class="img-fluid" src="https://tutorialsninja.com/demo/image/cache/catalog/demo/macbook_5-74x74.jpg" title="MacBook" alt="MacBook">
+                </a>
+              </li>
+              <li class="image-additional me-2">
+                <a class="thumbnail" href="https://tutorialsninja.com/demo/image/cache/catalog/demo/macbook_4-500x500.jpg" title="MacBook">
+                  <img class="img-fluid" src="https://tutorialsninja.com/demo/image/cache/catalog/demo/macbook_4-74x74.jpg" title="MacBook" alt="MacBook">
+                </a>
+              </li> -->
+            </ul>
+  
+            <!-- Tab Section -->
+            <ul class="nav nav-tabs mt-3">
+              <li class="nav-item">
+                <a class="nav-link active" id="tab-description-tab" data-bs-toggle="tab" href="#tab-description" role="tab">Description</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" id="tab-specification-tab" data-bs-toggle="tab" href="#tab-specification" role="tab">Specification</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="tab-review-tab" data-bs-toggle="tab" href="#tab-review" role="tab">Reviews (0)</a>
+              </li> -->
+            </ul>
+  
+            <div class="tab-content">
+              <!-- Description Tab -->
+              <div class="tab-pane fade show active p-3" id="tab-description" role="tabpanel">
+                <p><b>{{currentProduct?.description}}</b></p>
+                
+              </div>    
+            </div>
+          </div>
+          <!-- Sidebar (Product Details) -->
+          <div class="col-sm-4">
+            <h1>{{currentProduct?.name}}</h1>
+            <ul class="list-unstyled">
+              <li>Brand: <a href="#">{{currentProduct?.brand?.brandName}}</a></li>
+              <li>Product Code: {{currentProduct?.sku}}</li>
+              <li>Available Items: {{currentProduct?.quantity}}</li>
+              <li>Availability: @if (!currentProduct?.isInStock) {
+                Available
+              } 
+            @else {
+              Out Of Stock
+            }</li>
+            </ul>
+            <h2 class="text-success">{{ currentProduct?.price | number :'1.2-2'}} €</h2>
+            <!-- <p>Ex Tax: $500.00</p> -->
+            <div class="d-grid">
+              <!-- <label for="input-quantity" class="form-label">Qty</label>
+              <input type="number" id="input-quantity" class="form-control mb-2" value="1" /> -->
+              <button id="button-cart" class="btn btn-primary" [disabled]="currentProduct?.quantity === 0" (click)="addToCart()" >Add to Cart</button>
+            </div>
+          </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+  

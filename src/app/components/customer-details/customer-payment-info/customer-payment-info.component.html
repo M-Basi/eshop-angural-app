@@ -1,0 +1,30 @@
+<div class="card p-3" style="width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-body">
+      <h5 class="card-title">Στοιχεία Κάρτας</h5>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="text-wrap">
+          <!-- <h6 class="mb-1"> {{currentCustomer?.paymentInfoReadOnlyDTO}}</h6>
+          <h6 class="mb-1"> {{currentCustomer?.lastname}}</h6> -->
+          <p class="mb-1">
+            @if (!customer?.paymentInfoReadOnlyDTO) {
+            -
+          } @else {
+              {{customer?.paymentInfoReadOnlyDTO?.card}}
+            }</p>
+          <p class="mb-1">{{customer?.paymentInfoReadOnlyDTO?.cardName}}</p>
+          <p class="mb-1">{{customer?.paymentInfoReadOnlyDTO?.expiredDate}}</p>
+          <p class="mb-0">{{customer?.paymentInfoReadOnlyDTO?.cardValidation}}</p>
+        </div>
+        @if (!customer?.paymentInfoReadOnlyDTO) {
+          <button class="btn btn-link p-0" (click)="onSaveClick()" aria-label="Edit">
+              <i class="bi bi-pencil" style="font-size: 1.2rem;"></i>
+            </button>
+      } @else {
+          <button class="btn btn-link p-0" (click)="onEditClick()" aria-label="Edit">
+              <i class="bi bi-pencil" style="font-size: 1.2rem;"></i>
+            </button>
+      }
+        
+      </div>
+    </div>
+  </div>

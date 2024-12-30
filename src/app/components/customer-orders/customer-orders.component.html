@@ -1,0 +1,5 @@
+<div  class="flex flex-column">
+    <div *ngFor="let order of currentCustomer?.ordersReadOnlyDTOs" class="row g-0 align-items-center">
+        <app-order [order]="order"></app-order>
+      </div>
+</div>
