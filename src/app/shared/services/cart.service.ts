@@ -56,6 +56,10 @@ export class CartService {
       if (existingItem?.quantity) {
         // Αν δεν υπάρχει, το προσθέτουμε στο cart
         existingItem.quantity += 1;
+        if (existingItem.totalPrice && existingItem.price) {
+          existingItem.totalPrice += existingItem.price
+        }
+        
       } else {
         // Αν υπάρχει, αυξάνουμε την ποσότητα του
         cart.push(orderItem);
