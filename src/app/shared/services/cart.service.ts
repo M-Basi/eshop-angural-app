@@ -53,9 +53,12 @@ export class CartService {
     if (orderItem) {
       const existingItem = cart.find(item => item.id === orderItem.id); // Εύρεση του στοιχείου με βάση κάποιο ID
       
-      if (existingItem?.quantity) {
+      if (existingItem?.quantity ) {
         // Αν δεν υπάρχει, το προσθέτουμε στο cart
-        existingItem.quantity += 1;
+        if (existingItem.quantity < product.quantity){
+          existingItem.quantity += 1;
+        }       
+      
         if (existingItem.totalPrice && existingItem.price) {
           existingItem.totalPrice += existingItem.price
         }

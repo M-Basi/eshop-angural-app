@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { CustomerUuidService } from '../../shared/services/customer-uuid.service';
 import { CustomersService } from '../../shared/services/customers.service';
 import { Customer } from '../../shared/interfaces/customer';
+import { ProductService } from '../../shared/services/product.service';
+import { Product } from '../../shared/interfaces/product';
 
 
 
@@ -25,13 +27,13 @@ import { Customer } from '../../shared/interfaces/customer';
 export class CartComponent {
   cartService = inject(CartService)
   productIdService = inject(ProductIdService)
+  productService = inject(ProductService)
   router = inject(Router)
   customerUuidService = inject(CustomerUuidService)
   customerService = inject(CustomersService)
   successMessage: string | null = null;
   errorMessage: string | null = null;
-  
-  
+
 
   currentCustomer: Customer | undefined;
   totalSum: number = 0;
@@ -79,11 +81,22 @@ export class CartComponent {
   }
 
   updateQuantity(productId: number, quantity: number): void {
-  
-    if (quantity < 1) {
-      quantity = 1;
-    }
-    this.cartService.updateItemQuantityCart(productId, quantity);
+    let usedProduct: Product | undefined
+    this.productService.productById(productId).subscribe({
+      next: (product) => {
+        console.log('Product fetched successfully:', product);
+        usedProduct = product;
+        if (usedProduct?.quantity < quantity) {
+          quantity = usedProduct.quantity
+          alert(`Max quantity is ${usedProduct.quantity}`)
+        }
+        this.cartService.updateItemQuantityCart(productId, quantity);
+      },
+      error: (error) => {
+        console.error('Error fetching product:', error);
+      },
+    }); 
+
     this.loadCart();
   }
 
