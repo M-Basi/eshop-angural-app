@@ -52,11 +52,11 @@
               <li>Brand: <a href="#">{{currentProduct?.brand?.brandName}}</a></li>
               <li>Product Code: {{currentProduct?.sku}}</li>
               <li>Available Items: {{currentProduct?.quantity}}</li>
-              <li>Availability: @if (!currentProduct?.isInStock) {
-                Available
+              <li>Availability: @if (currentProduct?.inStock) {
+                <span class="text-success fw-bold">Available</span>
               } 
             @else {
-              Out Of Stock
+              <span class="text-danger fw-bold"> Out Of Stock </span>
             }</li>
             </ul>
             <h2 class="text-success">{{ currentProduct?.price | number :'1.2-2'}} €</h2>

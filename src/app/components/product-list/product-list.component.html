@@ -25,7 +25,13 @@
          
        
         <div class="d-flex justify-content-between align-items-center">
-          <span class="text-success fw-bold"> @if (!product?.isInStock){Άμεσα διαθέσιμο} ({{product?.quantity}} τεμ)</span>
+           
+            @if(product?.inStock){
+              <span class="text-success fw-bold">Άμεσα διαθέσιμο {{product?.quantity}} τεμ</span>
+          } @else {
+           <span class="text-danger fw-bold"> Out of Stock</span>
+          }
+             
           <span class="text-primary fs-4">{{product?.price | number: '1.2-2' }} € </span>
           @if (user()?.role === 'ADMIN_USER' && product?.id) {
             <button class="btn btn-warning text-white" (click)="toUpdateProduct(product?.id ?? 0)">Επεξεργασία Προϊόντος</button>

@@ -12,7 +12,7 @@ export interface Product {
     quantity: number
     description: string
     isActive: boolean
-    isInStock: boolean
+    inStock: boolean
     image: {
         filename: string,
         savedName: string,
