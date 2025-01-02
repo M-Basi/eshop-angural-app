@@ -4,7 +4,9 @@
       <mat-form-field>        
         <mat-label>Όνομα Καρτας</mat-label>        
         <input matInput type="text" formControlName="cardName" placeholder="πχ. Marios Petropoulos">
-        <mat-error *ngIf="form.get('cardName')?.invalid && form.get('cardName')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('cardName')?.invalid && form.get('cardName')?.touched">
+          Το ονοματεπώνυμο είναι υποχρεωτικό
+        </mat-error>
         
       </mat-form-field>
       
@@ -12,19 +14,25 @@
       <mat-form-field>
         <mat-label>Αριθμός Κάρτας</mat-label>
         <input matInput type="text" formControlName="card" placeholder="π.χ., 1234765987652344">
-        <mat-error *ngIf="form.get('card')?.invalid && form.get('card')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('card')?.invalid && form.get('card')?.touched">
+          Ο αριθμός κάρτας είναι υποχρεωτικός. Πρέπει να είναι 16 αριθμοί. 
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Ημερομηνία Λήξης</mat-label>
         <input matInput type="text" formControlName="expiredDate" placeholder="π.χ., 12/27">
-        <mat-error *ngIf="form.get('expiredDate')?.invalid && form.get('expiredDate')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('expiredDate')?.invalid && form.get('expiredDate')?.touched">
+          Η ημερομηνία λήξης πρέπει να είναι σε μορφή MM/YY.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>CVV</mat-label>
         <input matInput type="text" formControlName="cardValidation" placeholder="π.χ., 699">
-        <mat-error *ngIf="form.get('cardValidation')?.invalid && form.get('cardValidation')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('cardValidation')?.invalid && form.get('cardValidation')?.touched">
+          Το CVV είναι υποχρεωτικό. Πρέπει να είναι 3 ψηφία.
+        </mat-error>
       </mat-form-field>
 
 

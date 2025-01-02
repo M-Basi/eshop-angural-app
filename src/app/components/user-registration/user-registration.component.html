@@ -1,6 +1,6 @@
 <div class="d-flex flex-column mt-2 w-50">
     <form [formGroup]="form" class="d-flex flex-column" (ngSubmit)="onSubmit()">
-      <!-- Username (Email) -->
+
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="username" />
@@ -9,7 +9,7 @@
         <mat-error *ngIf="form.get('username')?.hasError('email')">Invalid email format</mat-error>
       </mat-form-field>
   
-      <!-- Password -->
+
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
@@ -20,7 +20,7 @@
        
       </mat-form-field>
   
-      <!-- Confirm Password -->
+
       <mat-form-field>
         <mat-label>Confirm Password</mat-label>
         <input matInput type="password" formControlName="confirmPassword" />
@@ -28,48 +28,8 @@
         <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Confirm Password is required</mat-error>
       </mat-form-field>
   
-      <!-- Submit Button -->
       <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sign Up</button>
     </form>
   </div>
   
-  
-<!-- <div class="d-flex flex-column mt-2 w-50">
-    <form [formGroup]="form" class="d-flex flex-column" (ngSubmit)="onSubmit(form.value)">
-    
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="username" />
-        <mat-error *ngIf="form.get('username')?.hasError('duplicateEmail')">Email is already in use</mat-error>
-        <mat-error *ngIf="form.get('username')?.hasError('required')">Email is required</mat-error>
-        <mat-error *ngIf="form.get('username')?.hasError('email')">Invalid email format</mat-error>
-      </mat-form-field>
-  
-
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
-        <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
-        <mat-error *ngIf="form.get('password')?.hasError('minlength')">Password must be at least 4 characters</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" />
-        <mat-error *ngIf="form.get('confirmPassword')?.hasError('passwordMismatch')">Passwords do not match</mat-error>
-        <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Confirm Password is required</mat-error>
-      </mat-form-field>
-  
-
-      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sign Up</button>
-    </form>
-  
-
-    <div *ngIf="registrationStatus.message" class="alert mt-3" [ngClass]="{'alert-success': registrationStatus.success, 'alert-danger': !registrationStatus.success}">
-        <strong>{{ registrationStatus.success ? 'Success:' : 'Error:' }}</strong> {{ registrationStatus.message }}
-      </div>
-  
-
-    <button *ngIf="registrationStatus.success" mat-flat-button color="primary" class="mt-2" (click)="registerAnother()">Register another user</button>
-  </div> -->
   

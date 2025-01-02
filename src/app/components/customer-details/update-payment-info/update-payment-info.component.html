@@ -15,7 +15,7 @@
         <mat-label>Αριθμός Κάρτας</mat-label>
         <input matInput type="text" formControlName="card" placeholder="π.χ., 1234765987652344">
         <mat-error *ngIf="form.get('card')?.invalid && form.get('card')?.touched">
-          Ο αριθμός της κάρτας πρέπει να περιέχει 16 ψηφία.
+          Ο αριθμός κάρτας είναι υποχρεωτικός. Πρέπει να είναι 16 αριθμοί. 
         </mat-error>
         
       </mat-form-field>
@@ -33,7 +33,7 @@
         <mat-label>CVV</mat-label>
         <input matInput type="text" formControlName="cardValidation" placeholder="π.χ., 699">
         <mat-error *ngIf="form.get('cardValidation')?.invalid && form.get('cardValidation')?.touched">
-          Το CVV πρέπει να περιέχει 3 ψηφία.
+          Το CVV είναι υποχρεωτικό. Πρέπει να είναι 3 ψηφία.
         </mat-error>
       </mat-form-field>
 

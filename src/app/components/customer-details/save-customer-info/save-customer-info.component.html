@@ -4,7 +4,9 @@
       <mat-form-field>        
         <mat-label>Όνομα</mat-label>        
         <input matInput type="text" formControlName="firstname" placeholder="πχ. Μάριος">
-        <mat-error *ngIf="form.get('firstname')?.invalid && form.get('firstname')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('firstname')?.invalid && form.get('firstname')?.touched">
+          Το όνομα είναι υποχρεωτικό
+        </mat-error>
         
       </mat-form-field>
       
@@ -12,7 +14,9 @@
       <mat-form-field>
         <mat-label>Επίθετο</mat-label>
         <input matInput type="text" formControlName="lastname" placeholder="π.χ., Παπαπέτρου">
-        <mat-error *ngIf="form.get('lastname')?.invalid && form.get('lastname')?.touched"></mat-error>
+        <mat-error *ngIf="form.get('lastname')?.invalid && form.get('lastname')?.touched">
+          Το επίθετο είναι υποχρεωτικό
+        </mat-error>
       </mat-form-field>
     </form>
       

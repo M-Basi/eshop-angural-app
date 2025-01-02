@@ -7,7 +7,9 @@
         
         <input matInput type="text" formControlName="sku" placeholder="00001" (input)="onSkuInput($event)">
         <p *ngIf="errorMessageSku" class="error-message text-danger">{{ errorMessageSku }}</p>
-        <mat-error *ngIf="productForm.get('sku')?.invalid && productForm.get('sku')?.touched"></mat-error>
+        <mat-error *ngIf="productForm.get('sku')?.invalid && productForm.get('sku')?.touched">
+          Το sku είναι μοναδικό. Επτρέπονται μόνο αριθμοί
+        </mat-error>
         
       </mat-form-field>
       
@@ -15,13 +17,17 @@
       <mat-form-field>
         <mat-label>Όνομα Προϊόντος</mat-label>
         <input matInput type="text" formControlName="name" placeholder="π.χ., Iphone 14 pro Max">
-        <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"></mat-error>
+        <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+          To όνομα Προϊόντος είναι υποχρεωτικό!
+        </mat-error>
       </mat-form-field>
   
       <mat-form-field>
         <mat-label>Price</mat-label>
         <input matInput type="number" formControlName="price" placeholder="π.χ., 199,99">
-        <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"></mat-error>
+        <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+          Η τιμή είναι υποχρεωτική. Επτρεπονται μόνο αριθμοί με 2 δεκαδικά ψηφία
+        </mat-error>
         
       </mat-form-field>
   
@@ -75,6 +81,7 @@
         <mat-label>Ποσότητα</mat-label>
         <input matInput type="number" formControlName="quantity" placeholder="π.χ., 10">
         <mat-error *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
+          Μόνο αριθμούς
         </mat-error>
       </mat-form-field>
 
