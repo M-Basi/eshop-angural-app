@@ -131,24 +131,26 @@ export class CartComponent {
   placeOrder(){
     this.patchForm();
     const formData = this.form.value;
+    const isOrderConfirmed = window.confirm('Τοποθέτηση παραγγελίας;');
+    if (!isOrderConfirmed) return;
     this.customerService.orderSave(formData).subscribe({
-        next: (response) => {
-          console.log('Order saved successfully:', response);
-          this.successMessage = 'Η παραγγελία τοποθετήθηκε με επιτυχία';
-          this.errorMessage = null;          
+      next: (response) => {
+        console.log('Order saved successfully:', response);
+        this.successMessage = 'Η παραγγελία τοποθετήθηκε με επιτυχία';
+        this.errorMessage = null;          
 
-          const isConfirmed = window.confirm('Η παραγγελία τοποθετήθηκε με επιτυχία!');
-          if (isConfirmed) {
-            this.router.navigate(['/welcome']);
-          }
-        },
-        
-        error: (err) => {
-          console.error('Error saving order:', err);
-          this.errorMessage = 'Failed to save order. Please try again.';
-          this.successMessage = null;
-        },
-      });
+        const isConfirmed = window.confirm('Η παραγγελία τοποθετήθηκε με επιτυχία!');
+        if (isConfirmed) {
+          this.router.navigate(['/welcome']);
+        }
+      },
+      
+      error: (err) => {
+        console.error('Error saving order:', err);
+        this.errorMessage = 'Failed to save order. Please try again.';
+        this.successMessage = null;
+      },
+    });
     } 
   
 
